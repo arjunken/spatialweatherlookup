@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Weather</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" type="text/css"
+    media="all" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+<link href="index.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>    
+<script type='text/javascript' src='config.js'></script>    
+<script src='index.js' defer></script>
+
+<body>
+    <div class="navbar navbar-default navbar-static-top bg-light sticky-top bg-dark" role="navigation">    
+        <div class="container d-flex justify-content-between">
+                <h3 class="text-warning"> Spatial Weather-LookUp</h3>
+                <div class="navbar-header ml-auto"> 
+                       <a href="#" data-toggle="modal" data-target="#ReadmeModal"><small class="text-muted ml-2">READ ME</small> 
+                        </a> <a href="#" data-toggle="modal" data-target="#DisclaimerModal"> <small class="text-muted ml-2">DISCLAIMER</small> </a> 
+                        <button id="homeloc" class="btn btn-primary btn-sm ml-2" type="submit">Home Location</button>                         
+                        <button id="homeloc" class="btn btn-primary btn-sm ml-2" type="submit">Reset View</button>               
+                </div>   
+                <div id="aBtnGroup" class="btn-group ml-auto"> 
+                    <button type="button" value="C" class="btn btn-primary active text-light">°C</button> 
+                    <button type="button" value="F" class="btn text-light">°F</button>
+                </div>             
+        </div>     
+    </div>
+    
+    <div class="sect sect--padding-top">       
+                 
+            <div class="container"> 
+                
+                <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home">MAP</a>
+                        </li>
+                        <li class="nav-item">
+                        <a id="weather-tab" class="nav-link" data-toggle="tab" href="#menu1">Weather</a>
+                        </li>                        
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <div id="home" class="container tab-pane active"><br>                            
+                            <div id="map-div">
+                                <!-- <button id="getweather" class="ml-auto">Get Weather</button> -->
+                                <div id="mapid"> 
+                                    <div class="leaflet-top leaflet-right">                                     
+                                        <input type="button" id="getweather" value="Get Weather" class="btn btn-primary btn-sm btnStyle span3 leaflet-control" style="pointer-events: auto;"/>                           
+                                    </div>
+                                </div>                     
+                            </div>                        
+                        </div>
+
+                        <div id="menu1" class="container tab-pane fade"><br>
+                            <div id="results" style="display: none;">
+                                <div class="card card-weather">
+                                    <div id="main-display" class="card-body" style="height: 465px;">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="weather-date-location">
+                                                <h3 id="fd-place">Place</h3>
+                                                <p class="text-gray"> <span id="fd-date">Date Month, Year</span><span> |
+                                                    </span><span id="fd-time">Time</span></p>
+                                            </div>
+                                            <div>
+                                                <h4 id="fd-temp" class="display-3"> 32</h4>
+                                                <h4 class="text-center"><span>Feels like </span> <span id="fd-fl"></span></h4>
+                                            </div>
+                                        </div>
+                                        <div id="other-weather-data" class="d-flex justify-content-between m-5">
+                                            <div id="fd-icon"></div>
+                                            <div>
+                                                <h6 class="text-gray">Humidity</h6>
+                                                <h3> <span id="fd-hum">Conditions</span></h3>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-gray">Clouds</h6>
+                                                <h3> <span id="fd-clouds">Conditions</span></h3>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-gray">Visibility</h6>
+                                                <h3> <span id="fd-vis">Conditions</span></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="d-flex weekly-weather" style="background-color: rgb(0, 175, 219);"></div>
+                                    </div>
+                                </div> <button id="download" class="mt-3"> Download Data</button>
+                            </div>                 
+                          </div>  
+                                                
+                    </div> 
+
+              </div>       
+    </div>
+    <div class="modal fade" id="ReadmeModal" tabindex="-1" role="dialog" aria-labelledby="ReadmeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ReadmeModalLabel">READ ME</h5> <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <h6> <strong> Introduction </strong></h6>
+                    <p>Hello and Welcome! Thanks for using this web app. You may have already discovered that there is
+                        nothing more than simply viewing weather on a map. You are absolutely right. In fact, there is
+                        nothing special about this web app. It is just weather look up on a map. There could be many
+                        solutions on the internet, providing the same information more effectively.
+                    <p><strong>So why did I develop this?</strong></p>
+                    <p>Lately, I have been learning a lot about new technologies to expand my product management
+                        experience into the technical side. So, as I learn new technology, I thought of creating
+                        something useful, no matter if the solution is available or not in the market. This way, I gain
+                        practical experience in developing products and showcasing my skills.</p>
+                    <p><strong>What features this web app comes with?</strong></p>
+                    <p>Here is the list of things you can do using this app:</p>
+                    <ul style="font-size:10pt;">
+                        <li>Find out the current weather for your home location and anywhere on the planet.</li>
+                        <li>Retrieve a seven-day weather forecast for your home location and anywhere on the planet.
+                        </li>
+                        <li>Get weather information by city names by simply locating them on the map.</li>
+                        <li>Download the weather data in CSV file format by simply clicking on the Download button.</li>
+                        <li>View weather data both in °C and °F</li>
+                    </ul>
+                    <p><strong>Would you like to contribute or report bugs?</strong></p>
+                    <p>I have created a GitHub repository for this web app. If you find bugs, please do report them on
+                        GitHub. If You are one like me, passionate about developing simple web apps, I welcome your
+                        contributions. Contact me on GitHub. Here is the link to the <a
+                            href="https://github.com/arjunken/spatialweatherlookup">GitHub Repository</a>.</p>
+                    <p><strong>Have questions to the developer?</strong></p>
+                    <p><a href="https://twitter.com/intent/tweet?screen_name=arjunken&ref_src=twsrc%5Etfw"
+                            class="twitter-mention-button" data-show-count="false">Tweet to @arjunken</a>
+                </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-secondary m-auto"
+                        data-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DisclaimerModal" tabindex="-1" role="dialog" aria-labelledby="DisclaimerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DisclaimerModalLabel">DISCLAIMER</h5> <button type="button"
+                        class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This information was brought to you by developer <strong>"Arjun Kenchappagoudra"</strong> and he
+                        has made every attempt to ensure the accuracy and reliability of the information provided on
+                        this website by simply pulling off information from <a
+                            href="https://openweathermap.org/">OpenWeatherMap</a>. The developer does not accept any
+                        responsibility or liability for the accuracy, content, completeness, legality, or reliability of
+                        the information contained on this website.</p>
+                    <p>No warranties, promises and/or representations of any kind, expressed or implied, are given as to
+                        the nature, standard, accuracy or otherwise of the information provided in this website nor to
+                        the suitability or otherwise of the information to your particular circumstances.</p>
+                    <p>Developer cannot and will not guarantee that this website is free from computer viruses or
+                        anything else that has destructive properties.</p>
+                    <p>Developer shall not be liable for any loss or damage of whatever nature (direct, indirect,
+                        consequential, or other) whether arising in contract, tort or otherwise, which may arise as a
+                        result of your use of (or inability to use) this website, or from your use of (or failure to
+                        use) the information on this site. This website provides links to other websites owned by third
+                        parties. The content of such third party sites is not within the developer's control, and
+                        developer cannot and will not take responsibility for the information or content thereon. Links
+                        to such third party sites are not to be taken as an endorsement by the developer of the third
+                        party site, or any products promoted, offered or sold on the third party site, nor that such
+                        sites are free from computer viruses or anything else that has destructive properties. Developer
+                        cannot and does not take responsibility for the collection or use of personal data from any
+                        third party site. In addition, developer will not accept responsibility for the accuracy of
+                        third party advertisements.</p>
+                    <p>The information provided on this website was fetched from third-party information providers using
+                        unique API keys/access tokens which could be visible or accessible. Copying these API
+                        keys/access tokens is prohibited and shall not be used in your projects. Developer retains the
+                        rights of using these API keys/access tokens.</p>
+                </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-secondary m-auto"
+                        data-dismiss="modal">Accept and Close</button></div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer fixed-bottom bg-dark">
+        <div class="footer-copyright text-center text-muted text-light py-2">© 2018 Copyright: <a
+                href="https://www.arjunken.com"> arjunken.com</a> <span> | Powered by: <a href="https://leafletjs.com/">
+                    LeafletJS</a> | <a href="https://openweathermap.org/"> OpenWeatherMap</a> | <a
+                    href="https://geolocation-db.com/"> Geolocation DB</a> </span> <span> | Technologies:
+                HTML5,JavaScript, JQuery, CSS, Bootstrap </span></div>
+    </footer>
+</body>
+
+</html>
