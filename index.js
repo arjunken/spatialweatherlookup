@@ -88,7 +88,8 @@ $(document).ready(function(){
          $("#aBtnGroup button").on("click", function () {
             $(this).addClass("active").siblings().removeClass("active");
             $(this).addClass("btn-primary").siblings().removeClass("btn-primary"),
-            tunit = $(this).val();          
+            tunit = $(this).val();   
+            $("#getweather").click();      
          });       
      
    
@@ -333,8 +334,7 @@ $(document).ready(function(){
 //** Handle Reset Functionality */
 
     $("#reset").click(function(){
-        $('#results').css('display','none'); 
-        mymap.flyTo(new L.LatLng(position[2], position[3]),13); 
+        location.reload();
     });
    
    
