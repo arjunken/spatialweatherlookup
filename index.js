@@ -278,7 +278,7 @@ $(document).ready(function(){
                                     '</div>'+
                                    '</div>';
                 }else{
-                    var main_display = '<div class="d-flex justify-content-between">'+
+                    var main_display = '<div class="d-flex justify-content-between flex-wrap">'+
                                     '<div class="weather-date-location">'+
                                         '<h3 id="fd-place">'+jData.timezone+'</h3>'+
                                         '<p class="text-gray"> <span id="fd-date">'+fdate+'</span><span> | </span><span id="fd-time">'+ftime+'</span> </p>'+
@@ -289,22 +289,22 @@ $(document).ready(function(){
                                     '<p class="text-center"> Min:'+jData.daily[num].temp.min.toFixed(0)+'°C | Max:'+jData.daily[num].temp.max.toFixed(0) +'°C</p>'+                        
                                     '</div>'+
                                    '</div>'+
-                                   '<div id="other-weather-data" class="d-flex justify-content-between">'+
+                                   '<div id="other-weather-data" class="d-flex justify-content-between flex-wrap ml-auto mt-auto">'+
                                     '<div id="fd-icon">'+ 
                                     '<img src="http://openweathermap.org/img/wn/'+jData.daily[num].weather[0].icon+'@2x.png"/> <br>'+                    
                                     '<h6 id="fd-icon" class="text-center">'+ jData.daily[num].weather[0].main +'</h6>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Humidity</h6>'+
-                                    '<h3> '+ jData.daily[num].humidity +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Humidity</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].humidity +'%</h3>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Clouds</h6>'+
-                                    '<h3> '+ jData.daily[num].clouds +'% </h3>'+
+                                    '<h6 class="text-gray text-center">Clouds</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].clouds +'% </h3>'+
                                     '</div>'+  
                                     '<div>'+
-                                    '<h6 class="text-gray">Chance of Rain</h6>'+
-                                    '<h3>'+ jData.daily[num].pop *100 +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Chance of Rain</h6>'+
+                                    '<h3 class="text-center">'+ jData.daily[num].pop *100 +'%</h3>'+
                                     '</div>'+
                                    '</div>';
                 }
