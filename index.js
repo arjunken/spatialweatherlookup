@@ -14,11 +14,10 @@ $(document).ready(function(){
     function getHomeLocation(callback){
         var homeloc_api = new XMLHttpRequest();
         homeloc_api.overrideMimeType("application/json");        
-        homeloc_api.open("GET", "https://geolocation-db.com/json/"+geocode_key, true);
-
+        homeloc_api.open("GET", "apicall.php?q=homeloc", true);
         homeloc_api.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                callback(JSON.parse(this.responseText));                         
+            if (this.readyState == 4 && this.status == 200) {                
+                callback(JSON.parse(this.responseText));                                        
             }
         };     
         homeloc_api.send(); 
@@ -28,10 +27,10 @@ $(document).ready(function(){
         
         var cityname_api = new XMLHttpRequest();
            cityname_api.overrideMimeType("application/json");     
-           cityname_api.open("GET",'https://api.openweathermap.org/data/2.5/find?lat='+position[0]+'&lon='+position[1]+'&cnt=1&appid=d9347e4e650b022f26f0990856107ac1',true);
+           cityname_api.open("GET",'apicall.php?q=cityname&lat='+position[0]+'&lon='+position[1],true);
            cityname_api.onreadystatechange = function() {
                if (this.readyState == 4 && this.status == 200) {
-                    callback(JSON.parse(this.responseText));                                                      
+                    callback(JSON.parse(this.responseText));                                                                   
                   }                 
         };     
         cityname_api.send(); 
@@ -53,11 +52,10 @@ $(document).ready(function(){
     zoomOffset: -1,
     accessToken: leaflet_key
     }).addTo(mymap);
-
     
-    getHomeLocation(function(homelatlon) {
+    getHomeLocation(function(homelatlon) {          
     homepos = [homelatlon.latitude,homelatlon.longitude];
-       getCityName(homepos,function(citydata){                                 
+       getCityName(homepos,function(citydata){                                  
         marker = L.marker(homepos).addTo(mymap);
         marker.bindPopup(citydata.list[0].name).openPopup();
         mymap.panTo(new L.LatLng(homepos[0],homepos[1]),13); 
@@ -110,8 +108,8 @@ $(document).ready(function(){
        
         // Call OpenWeatherMap API     
         var forecast_api = new XMLHttpRequest();
-        forecast_api.overrideMimeType("application/json");
-        forecast_api.open("GET", 'https://api.openweathermap.org/data/2.5/onecall?lat='+mapClick_lat+'&lon='+mapClick_lng+'&exclude=minutely&units=metric&appid='+openwm_key, true);
+        forecast_api.overrideMimeType("application/json");       
+        forecast_api.open("GET",'apicall.php?q=getweather&lat='+mapClick_lat+'&lon='+mapClick_lng, true);        
         forecast_api.onreadystatechange = function() {
                if (this.readyState == 4){
                   if(this.status == 200) {
@@ -125,8 +123,7 @@ $(document).ready(function(){
         forecast_api.send();        
    
         //Display Weather Data 
-        function weatherDisplay(jData) {          
-            
+        function weatherDisplay(jData) {       
             var wiconcode = jData.current.weather[0].icon + "@2x.png";  
             $('#results').css('display','');        
             $("#fd-icon").html('<img src="http://openweathermap.org/img/wn/'+wiconcode+'"/>');
@@ -343,6 +340,3 @@ $(document).ready(function(){
    
    
 });
-
-
-

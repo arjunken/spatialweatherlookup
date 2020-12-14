@@ -1,0 +1,4 @@
+<?php 
+   $GEOCODEDB_KEY = '1a811210-241d-11eb-b7a9-293dae7a95e1'; 
+   $OPENWEATHERMAP_KEY = '4c98517ac84972556ae7be27b417b333';   
+?>
