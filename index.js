@@ -336,6 +336,30 @@ $(document).ready(function(){
     $("#reset").click(function(){
         location.reload();
     });
-   
+
+//** Screen Width and Footer Placement */
+var windowsize = $(window).width();
+
+$(window).resize(function() {
+  windowsize = $(window).width();
+  console.log(windowsize);
+  if (windowsize < 1000) {
+    //if the window is less than 1000px remove fixed-bottom for footer
+    $(".page-footer").removeClass("fixed-bottom");   
+  }else{
+    $(".page-footer").addClass("fixed-bottom");  
+  }
+});
    
 });
+
+$(window).on("load",function() {
+    windowsize = $(window).width();
+    console.log(windowsize);
+    if (windowsize < 1000) {
+      //if the window is less than 1000px remove fixed-bottom for footer
+      $(".page-footer").removeClass("fixed-bottom");   
+    }else{
+      $(".page-footer").addClass("fixed-bottom");  
+    }
+  });
