@@ -342,7 +342,6 @@ var windowsize = $(window).width();
 
 $(window).resize(function() {
   windowsize = $(window).width();
-  console.log(windowsize);
   if (windowsize < 1000) {
     //if the window is less than 1000px remove fixed-bottom for footer
     $(".page-footer").removeClass("fixed-bottom");   
@@ -354,8 +353,7 @@ $(window).resize(function() {
 });
 
 $(window).on("load",function() {
-    windowsize = $(window).width();
-    console.log(windowsize);
+    windowsize = $(window).width();   
     if (windowsize < 1000) {
       //if the window is less than 1000px remove fixed-bottom for footer
       $(".page-footer").removeClass("fixed-bottom");   
