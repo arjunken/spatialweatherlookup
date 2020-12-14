@@ -12,7 +12,7 @@ $(document).ready(function(){
     function getHomeLocation(callback){
         var homeloc_api = new XMLHttpRequest();
         homeloc_api.overrideMimeType("application/json");        
-        homeloc_api.open("GET", "apicall.php?q=homeloc", true);
+        homeloc_api.open("GET", "https://geolocation-db.com/json/", true);
         homeloc_api.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {                
                 callback(JSON.parse(this.responseText));                                        
