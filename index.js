@@ -7,8 +7,6 @@ $(document).ready(function(){
     var homepos = [];
     var tunit='C';
     const leaflet_key = config.LEALET_KEY;
-    const geocode_key = config.GEOCODEDB_KEY;
-    const openwm_key = config.OPENWEATHERMAP_KEY;
         
    //**Point User to their current location */
     function getHomeLocation(callback){
