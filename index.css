@@ -10,3 +10,44 @@ body {
     no-repeat center;
   background-size: cover;
 }
+
+.weekly-weather-item:hover {
+  background-color: #969696;
+  cursor: pointer;
+}
+
+.card-weather .weekly-weather {
+  background: #fff;
+  overflow-x: auto;
+}
+.card-weather .weekly-weather .weekly-weather-item {
+  flex: 0 0 12.51%;
+  border-right: 1px solid #f2f2f2;
+  padding: 1rem;
+  text-align: center;
+}
+.card-weather .weekly-weather .weekly-weather-item i {
+  font-size: 1.1rem;
+}
+
+.card .card-body {
+  padding: 1.88rem 1.81rem;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+@media (max-width: 991.98px) {
+  .padding {
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .padding {
+    padding: 1rem;
+  }
+}
+.padding {
+  padding: 5rem;
+}
