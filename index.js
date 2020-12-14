@@ -92,13 +92,14 @@ $(document).ready(function(){
             $(this).addClass("btn-primary").siblings().removeClass("btn-primary"),
             tunit = $(this).val();          
          });       
-    
-
+     
+   
     //** Handle Get Weather and Display Functionality */
 
        $("#getweather").click(function() {        
         
         //Switch to Weather Tab
+        $("#weather-tab").removeClass("disabled");
         $("#weather-tab").click();
          
         //Initialize variables
