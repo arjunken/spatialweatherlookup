@@ -89,13 +89,13 @@ $(document).ready(function(){
             $(this).addClass("active").siblings().removeClass("active");
             $(this).addClass("btn-primary").siblings().removeClass("btn-primary"),
             tunit = $(this).val();   
-            $("#getweather").click();      
+            $(".getweather").click();      
          });       
      
    
     //** Handle Get Weather and Display Functionality */
 
-       $("#getweather").click(function() {        
+       $(".getweather").click(function() {        
         
         //Switch to Weather Tab
         $("#weather-tab").removeClass("disabled");
