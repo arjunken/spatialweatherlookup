@@ -7,8 +7,6 @@ $(document).ready(function(){
     var homepos = [];
     var tunit='C';
     const leaflet_key = config.LEALET_KEY;
-    const geocode_key = config.GEOCODEDB_KEY;
-    const openwm_key = config.OPENWEATHERMAP_KEY;
         
    //**Point User to their current location */
     function getHomeLocation(callback){
@@ -90,13 +88,14 @@ $(document).ready(function(){
          $("#aBtnGroup button").on("click", function () {
             $(this).addClass("active").siblings().removeClass("active");
             $(this).addClass("btn-primary").siblings().removeClass("btn-primary"),
-            tunit = $(this).val();          
+            tunit = $(this).val();   
+            $(".getweather").click();      
          });       
      
    
     //** Handle Get Weather and Display Functionality */
 
-       $("#getweather").click(function() {        
+       $(".getweather").click(function() {        
         
         //Switch to Weather Tab
         $("#weather-tab").removeClass("disabled");
@@ -249,7 +248,7 @@ $(document).ready(function(){
                 let fdate = (new Date(1000 * jData.daily[num].dt)).toLocaleDateString(undefined,options); 
                 let ftime = (new Date(1000 * jData.daily[num].dt)).toLocaleTimeString();  
                 if(tunit == 'F'){
-                    var main_display = '<div class="d-flex justify-content-between">'+
+                    var main_display = '<div class="d-flex justify-content-between flex-wrap">'+
                                     '<div class="weather-date-location">'+
                                         '<h3 id="fd-place">'+jData.timezone+'</h3>'+
                                         '<p class="text-gray"> <span id="fd-date">'+fdate+'</span><span> | </span><span id="fd-time">'+ftime+'</span> </p>'+
@@ -260,26 +259,26 @@ $(document).ready(function(){
                                         '<p class="text-center"> Min:'+((jData.daily[num].temp.min *1.8)+32).toFixed(0)+'°F | Max:'+((jData.daily[num].temp.max *1.8)+32).toFixed(0) +'°F</p>'+                         
                                     '</div>'+
                                    '</div>'+
-                                   '<div id="other-weather-data" class="d-flex justify-content-between">'+
+                                   '<div id="other-weather-data" class="d-flex justify-content-between flex-wrap ml-auto mt-auto">'+
                                     '<div id="fd-icon">'+ 
                                     '<img src="http://openweathermap.org/img/wn/'+jData.daily[num].weather[0].icon+'@2x.png"/> <br>'+                    
                                     '<h6 id="fd-icon" class="text-center">'+ jData.daily[num].weather[0].main +'</h6>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Humidity</h6>'+
-                                    '<h3> '+ jData.daily[num].humidity +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Humidity</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].humidity +'%</h3>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Clouds</h6>'+
-                                    '<h3> '+ jData.daily[num].clouds +'% </h3>'+
+                                    '<h6 class="text-gray text-center">Clouds</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].clouds +'% </h3>'+
                                     '</div>'+  
                                     '<div>'+
-                                    '<h6 class="text-gray">Chance of Rain</h6>'+
-                                    '<h3>'+ jData.daily[num].pop *100 +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Chance of Rain</h6>'+
+                                    '<h3 class="text-center">'+ jData.daily[num].pop *100 +'%</h3>'+
                                     '</div>'+
                                    '</div>';
                 }else{
-                    var main_display = '<div class="d-flex justify-content-between">'+
+                    var main_display = '<div class="d-flex justify-content-between flex-wrap">'+
                                     '<div class="weather-date-location">'+
                                         '<h3 id="fd-place">'+jData.timezone+'</h3>'+
                                         '<p class="text-gray"> <span id="fd-date">'+fdate+'</span><span> | </span><span id="fd-time">'+ftime+'</span> </p>'+
@@ -290,22 +289,22 @@ $(document).ready(function(){
                                     '<p class="text-center"> Min:'+jData.daily[num].temp.min.toFixed(0)+'°C | Max:'+jData.daily[num].temp.max.toFixed(0) +'°C</p>'+                        
                                     '</div>'+
                                    '</div>'+
-                                   '<div id="other-weather-data" class="d-flex justify-content-between">'+
+                                   '<div id="other-weather-data" class="d-flex justify-content-between flex-wrap ml-auto mt-auto">'+
                                     '<div id="fd-icon">'+ 
                                     '<img src="http://openweathermap.org/img/wn/'+jData.daily[num].weather[0].icon+'@2x.png"/> <br>'+                    
                                     '<h6 id="fd-icon" class="text-center">'+ jData.daily[num].weather[0].main +'</h6>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Humidity</h6>'+
-                                    '<h3> '+ jData.daily[num].humidity +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Humidity</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].humidity +'%</h3>'+
                                     '</div>'+ 
                                     '<div>'+
-                                    '<h6 class="text-gray">Clouds</h6>'+
-                                    '<h3> '+ jData.daily[num].clouds +'% </h3>'+
+                                    '<h6 class="text-gray text-center">Clouds</h6>'+
+                                    '<h3 class="text-center"> '+ jData.daily[num].clouds +'% </h3>'+
                                     '</div>'+  
                                     '<div>'+
-                                    '<h6 class="text-gray">Chance of Rain</h6>'+
-                                    '<h3>'+ jData.daily[num].pop *100 +'%</h3>'+
+                                    '<h6 class="text-gray text-center">Chance of Rain</h6>'+
+                                    '<h3 class="text-center">'+ jData.daily[num].pop *100 +'%</h3>'+
                                     '</div>'+
                                    '</div>';
                 }
@@ -335,9 +334,30 @@ $(document).ready(function(){
 //** Handle Reset Functionality */
 
     $("#reset").click(function(){
-        $('#results').css('display','none'); 
-        mymap.flyTo(new L.LatLng(position[2], position[3]),13); 
+        location.reload();
     });
-   
+
+//** Screen Width and Footer Placement */
+var windowsize = $(window).width();
+
+$(window).resize(function() {
+  windowsize = $(window).width();
+  if (windowsize < 1000) {
+    //if the window is less than 1000px remove fixed-bottom for footer
+    $(".page-footer").removeClass("fixed-bottom");   
+  }else{
+    $(".page-footer").addClass("fixed-bottom");  
+  }
+});
    
 });
+
+$(window).on("load",function() {
+    windowsize = $(window).width();   
+    if (windowsize < 1000) {
+      //if the window is less than 1000px remove fixed-bottom for footer
+      $(".page-footer").removeClass("fixed-bottom");   
+    }else{
+      $(".page-footer").addClass("fixed-bottom");  
+    }
+  });

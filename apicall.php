@@ -1,6 +1,6 @@
 <?php
 
-include('config.php');
+include('config/.config.php');
 
 // get the q parameter from URL  
 $q = $_REQUEST["q"];
